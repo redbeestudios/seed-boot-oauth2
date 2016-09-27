@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<title>OAUTH2 Single Sign On Services</title>
+<meta name="description" content="Login" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link href="css/signin.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="logo">
+        <img src="images/logo_aleph.png" class="img-responsive" />
+        <p class="text-center">OAUTH2 Single Sign On Services</p>
+    </div>
+    <div class="container">
+        <form method="POST" action="
+        " class="form-signin panel panel-default">
+            <h3 class="form-signin-heading">Inicio Sesión</h3>
+            <hr />
+            <p th:if="${error}" class="login-error">
+                <strong>Error!</strong> El usuario o contraseña no es válido
+            </p>
+            <input type="text" name="username" class="form-control"  placeholder="Usuario" />
+            <br />
+            <input type="password" name="password" class="form-control" placeholder="Contrase&ntilde;a" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <hr />
+                <input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}" />
+            <a href="#" target="_self">
+                <img src="images/logo_turner_silver_footer.png" class="img-responsive" />
+            </a>
+        </form>
+        <hr />
+    </div>
+    <label class="checkbox text-center">
+   	    <img src="images/footer-logos.jpg" />
+    </label>
+</body>
+</html>

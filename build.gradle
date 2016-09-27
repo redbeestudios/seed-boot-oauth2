@@ -1,0 +1,62 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'boot-oauth2'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-actuator-docs')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.cloud:spring-cloud-starter-config')
+	compile('org.springframework.security.oauth:spring-security-oauth2:2.0.11.RELEASE')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.session:spring-session')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('redis.clients:jedis:2.8.0')
+	compile('org.springframework.data:spring-data-redis:1.7.2.RELEASE')
+	compile('org.springframework.security:spring-security-ldap')
+	compile('com.zaxxer:HikariCP:2.4.7')
+    compile('net.logstash.logback:logstash-logback-encoder:4.5.1')
+	runtime('mysql:mysql-connector-java')
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'junit:junit:4.8.2'
+    testCompile 'org.mockito:mockito-core:1.+'
+	
+	
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5"
+	}
+}
+
+bootRun {
+    jvmArgs = ["-Dspring.profiles.active=desa"]
+}

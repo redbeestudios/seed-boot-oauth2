@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>OAUTH 2 Single Sign On Services</title>
+        
+        <!-- Vendor CSS -->
+        <link href="css/animate.min.css" rel="stylesheet" />
+        <link href="css/material-design-iconic-font.min.css" rel="stylesheet" />
+            
+        <!-- CSS -->
+        <link href="css/app.min.1.css" rel="stylesheet" />
+        <link href="css/app.min.2.css" rel="stylesheet" />
+    </head>
+    
+    <body class="login-content">
+        <!-- Login -->
+        <form method="POST" action="" class="lc-block toggled" id="l-login" autocomplete="off">
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-account" style="padding-right: 6px;"></i></span>
+                <div class="fg-line">
+                    <input type="text" name="username" class="form-control" placeholder="Username" autocomplete="off" style="padding-left: 3px;"/>
+                </div>
+            </div>
+            
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
+                <div class="fg-line">
+                    <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" style="padding-left: 3px;"/>
+                </div>
+            </div>
+
+            <div class="has-error hide" id="credentials">
+              <label class="control-label">
+                Username and password are required.
+              </label>
+            </div>
+
+            <div th:if="${error == true}" class="has-error">
+              <label class="control-label">
+                Some of your info isn't correct. Please try again.
+              </label>
+            </div>
+
+            <div th:if="${blocked}" class="has-error">
+              <label class="control-label">
+                This account is blocked. Please contact your administrator.
+              </label>
+            </div>
+
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
+            
+            <div class="clearfix"></div>
+            
+            <button type="submit" class="btn btn-login btn-info btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+        </form>
+        
+        <!-- Javascript Libraries -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/waves.min.js"></script>
+        <script src="js/functions.js"></script>
+        <script style="type/javascript">
+          $(document).ready(function(){
+            //Form validation
+            $('.input-group input').bind('focusout', required);
+            $('.input-group input').bind('input', required);
+            $('#l-login').on('submit', submit);
+          });
+
+          function required(event){
+            validate($(this));
+          }
+
+          function validate(elem){
+            var div = elem.closest('.input-group');
+            if(elem.val() === ''){
+              div.addClass('has-error');
+            } else {
+              div.removeClass('has-error');
+            }
+
+            var errors = $('.input-group.has-error');
+            var cred = $('#credentials');
+            if (errors.length > 0) {
+              cred.removeClass('hide');
+            } else {
+              cred.addClass('hide');
+            }
+          }
+
+          function submit(event){
+            validate($('input[name=username]'));
+            validate($('input[name=password]'));
+
+            var errors = $('.input-group.has-error');
+            if (errors.length > 0) {
+              event.preventDefault();
+            }
+          }
+        </script>
+        
+    </body>
+</html>

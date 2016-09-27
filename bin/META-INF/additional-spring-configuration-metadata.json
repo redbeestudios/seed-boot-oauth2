@@ -1,0 +1,18 @@
+{"properties": [
+  {
+    "name": "ldap.url",
+    "type": "java.lang.String",
+    "description": "LDAP URL for Oauth2 server application"
+  },
+  {
+    "name": "ldap.mocked",
+    "type": "java.lang.String",
+    "description": "A description for 'ldap.mocked'"
+  },
+  {
+    "name": "ldap.host",
+    "type": "java.lang.String",
+    "description": "A description for 'ldap.host'"
+  }
+ 
+]}
